@@ -28,9 +28,9 @@ def test_apply_discount_rejects_out_of_range_percent(percent):
 
 def test_cart_summary_line_carries_quantity_and_line_total():
     items = [{"name": "mug", "price": 500, "quantity": 3}]
-    assert cart_summary(items) == "mug x3: 1500 USD"
+    assert cart_summary(items) == "mug x3: 15.00 USD"
 
 
 def test_cart_summary_uses_the_given_currency():
     items = [{"name": "mug", "price": 500, "quantity": 1}]
-    assert cart_summary(items, currency="JPY") == "mug x1: 500 JPY"
+    assert cart_summary(items, currency="JPY") == "mug x1: 5.00 JPY"

@@ -1,3 +1,5 @@
+import pytest
+
 from src.checkout import DEFAULT_TAX_RATE, average_item_price, checkout
 
 
@@ -35,3 +37,9 @@ def test_tax_rate_defaults_to_the_module_default():
 def test_tax_rate_can_vary_per_order():
     items = [{"name": "mug", "price": 1000, "quantity": 1}]
     assert checkout(items, 0, tax_rate=8) == 1080
+
+
+def test_checkout_rejects_a_negative_tax_rate():
+    items = [{"name": "mug", "price": 1000, "quantity": 1}]
+    with pytest.raises(ValueError):
+        checkout(items, 0, tax_rate=-8)

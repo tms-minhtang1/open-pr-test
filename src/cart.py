@@ -24,8 +24,7 @@ def subtotal(items):
 def apply_discount(amount, percent):
     """Reduce amount by percent, in cents.
 
-    Raises ValueError for a percent outside 0-100, so a caller passing 150 or
-    -5 fails instead of silently charging nothing or charging full price.
+    Raises ValueError for a percent outside 0-100.
     """
     if not 0 <= percent <= 100:
         raise ValueError(f"percent must be between 0 and 100, got {percent}")
@@ -33,9 +32,13 @@ def apply_discount(amount, percent):
 
 
 def cart_summary(items, currency="USD"):
-    """One line per item, for the order confirmation email."""
+    """One line per item, for the order confirmation email.
+
+    Line totals are printed in the major currency unit, not in cents, since the
+    reader of the email sees the same figure that is charged.
+    """
     lines = []
     for item in items:
         line_total = to_decimal(item["price"]) * item["quantity"]
-        lines.append(f"{item['name']} x{item['quantity']}: {line_total} {currency}")
+        lines.append(f"{item['name']} x{item['quantity']}: {line_total / 100:.2f} {currency}")
     return "\n".join(lines)
