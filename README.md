@@ -1,4 +1,8 @@
 # open-pr-test
 
-Fixture repository for exercising the `open-pr` plugin against Bitbucket Cloud.
-Pull requests here exist to be reviewed; nothing in this repo is used in production.
+Throwaway fixture repo for `open-pr`'s end-to-end run. Nothing here is real code.
+
+## Conventions
+
+- Money is always cents, stored as an integer. Never a float.
+- Every multi-write operation runs inside a transaction.
